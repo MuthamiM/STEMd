@@ -1,0 +1,154 @@
+{
+  "Computer Science": {
+    "courses": [
+      {
+        "title": "Introduction to Programming",
+        "topics": [
+          {
+            "title": "What is Programming?",
+            "content": "Programming is the process of creating a set of instructions that tell a computer how to perform a task. Programming can be done using many different languages such as Python, Java, C++, and more. At its core, programming involves problem-solving and logical thinking.\n\nKey Concepts:\n• Variables – containers for storing data values\n• Data Types – integers, strings, booleans, floats\n• Control Flow – if/else statements and loops\n• Functions – reusable blocks of code\n\nProgramming is the foundation of all software, from mobile apps to operating systems.",
+            "quiz_subject": "programming fundamentals variables data types"
+          },
+          {
+            "title": "Control Structures",
+            "content": "Control structures determine the flow of execution in a program. They allow you to make decisions and repeat actions.\n\n1. Conditional Statements (if/else):\nThese let your program make decisions based on conditions. For example, checking if a user is old enough to vote.\n\n2. Loops (for, while):\nLoops repeat a block of code multiple times. A 'for' loop runs a set number of times, while a 'while' loop runs as long as a condition is true.\n\n3. Switch/Case:\nAn alternative to long if/else chains when comparing a single variable against multiple values.\n\nMastering control structures is essential for writing efficient and logical programs.",
+            "quiz_subject": "control structures if else loops for while switch"
+          },
+          {
+            "title": "Functions and Modular Code",
+            "content": "Functions are self-contained blocks of code that perform a specific task. They are the building blocks of modular programming.\n\nWhy use functions?\n• Reusability – write once, use many times\n• Readability – break complex problems into smaller pieces\n• Testing – easier to test individual components\n• Maintainability – changes in one place affect everywhere\n\nAnatomy of a function:\n1. Name – descriptive identifier\n2. Parameters – input values\n3. Body – the code that runs\n4. Return value – output of the function\n\nGood functions do one thing and do it well.",
+            "quiz_subject": "functions parameters return values modular programming"
+          },
+          {
+            "title": "Data Structures Basics",
+            "content": "Data structures are ways of organizing and storing data so that they can be accessed and modified efficiently.\n\nCommon data structures:\n• Arrays – fixed-size, ordered collections\n• Lists – dynamic-size ordered collections\n• Stacks – Last In, First Out (LIFO)\n• Queues – First In, First Out (FIFO)\n• Dictionaries/Maps – key-value pairs\n• Trees – hierarchical data organization\n• Graphs – networks of connected nodes\n\nChoosing the right data structure can make the difference between an algorithm that runs in seconds vs hours.",
+            "quiz_subject": "data structures arrays lists stacks queues trees"
+          }
+        ]
+      },
+      {
+        "title": "Data Structures & Algorithms",
+        "topics": [
+          {
+            "title": "Algorithm Complexity",
+            "content": "Big O notation is used to describe the performance or complexity of an algorithm.\n\nCommon Complexities:\n• O(1) – Constant time\n• O(log n) – Logarithmic time\n• O(n) – Linear time\n• O(n log n) – Linearithmic time\n• O(n²) – Quadratic time\n\nUnderstanding complexity helps you choose the most efficient solution for large data sets.",
+            "quiz_subject": "big o notation algorithm complexity time space"
+          },
+          {
+            "title": "Sorting Algorithms",
+            "content": "Sorting is the process of arranging data in a specific order (ascending or descending).\n\nAlgorithms:\n• Bubble Sort (O(n²))\n• Selection Sort (O(n²))\n• Insertion Sort (O(n²))\n• Merge Sort (O(n log n))\n• Quick Sort (O(n log n))\n\nEfficient sorting is fundamental to search and data processing tasks.",
+            "quiz_subject": "sorting bubble merge quick insertion selection"
+          }
+        ]
+      }
+    ]
+  },
+  "Machine Learning": {
+    "resources": [
+      {
+        "title": "📚 ML Library",
+        "description": "Access latest research papers and datasets.",
+        "button": "Open Library"
+      },
+      {
+        "title": "🧪 Jupiter Labs",
+        "description": "Interactive notebook environments for ML experiments.",
+        "button": "Enter Lab"
+      },
+      {
+        "title": "🤖 Model Zoo",
+        "description": "Pre-trained models and optimization guides.",
+        "button": "Get PDF"
+      }
+    ],
+    "courses": [
+      {
+        "title": "Foundations of Machine Learning",
+        "topics": [
+          {
+            "title": "What is Machine Learning?",
+            "content": "Machine Learning (ML) is a subset of Artificial Intelligence that gives computers the ability to learn from data without being explicitly programmed.\n\nThree types of ML:\n1. Supervised Learning – training with labeled data (e.g., spam detection)\n2. Unsupervised Learning – finding patterns in unlabeled data (e.g., clustering customers)\n3. Reinforcement Learning – learning through trial and reward (e.g., game-playing AI)\n\nML powers recommendation engines, self-driving cars, medical diagnosis, and much more.",
+            "quiz_subject": "machine learning supervised unsupervised reinforcement"
+          },
+          {
+            "title": "Linear Regression",
+            "content": "Linear Regression is one of the simplest ML algorithms. It models the relationship between a dependent variable and one or more independent variables by fitting a straight line.\n\nThe equation: y = mx + b\n• y = predicted value\n• m = slope (weight)\n• x = input feature\n• b = intercept (bias)\n\nThe goal is to find the best m and b that minimize the error between predictions and actual values. This is done using a method called Gradient Descent.\n\nLinear Regression is used in sales forecasting, risk assessment, and trend analysis.",
+            "quiz_subject": "linear regression gradient descent slope intercept"
+          },
+          {
+            "title": "Classification Algorithms",
+            "content": "Classification is a supervised learning task where the goal is to predict a categorical label.\n\nPopular algorithms:\n• Logistic Regression – despite the name, it is used for classification using a sigmoid function\n• Decision Trees – tree-like model of decisions with if/then rules\n• Random Forest – ensemble of many decision trees\n• K-Nearest Neighbors (KNN) – classifies based on the k closest data points\n• Support Vector Machines (SVM) – finds the optimal hyperplane separating classes\n\nEvaluation metrics: Accuracy, Precision, Recall, F1-Score, and Confusion Matrix.",
+            "quiz_subject": "classification logistic regression decision trees KNN SVM"
+          },
+          {
+            "title": "Neural Networks Introduction",
+            "content": "Neural Networks are computing systems inspired by biological neural networks in the brain.\n\nArchitecture:\n• Input Layer – receives the raw data\n• Hidden Layers – perform computations and learn features\n• Output Layer – produces the prediction\n\nKey concepts:\n• Weights and Biases – learnable parameters\n• Activation Functions – ReLU, Sigmoid, Tanh\n• Backpropagation – algorithm to update weights\n• Loss Function – measures prediction error\n• Epochs – number of training iterations\n\nDeep Learning uses neural networks with many hidden layers to solve complex problems like image recognition and language translation.",
+            "quiz_subject": "neural networks layers activation backpropagation deep learning"
+          }
+        ]
+      }
+    ]
+  },
+  "Physics": {
+    "courses": [
+      {
+        "title": "Classical Mechanics",
+        "topics": [
+          {
+            "title": "Newton's Laws of Motion",
+            "content": "Sir Isaac Newton's three laws form the foundation of classical mechanics.\n\n1st Law (Inertia): An object at rest stays at rest, and an object in motion stays in motion unless acted upon by an external force.\n\n2nd Law (F=ma): The acceleration of an object is directly proportional to the net force and inversely proportional to its mass.\n\n3rd Law (Action-Reaction): For every action, there is an equal and opposite reaction.\n\nThese laws explain everything from why a ball rolls to how rockets launch into space.",
+            "quiz_subject": "Newton laws of motion inertia force mass acceleration"
+          },
+          {
+            "title": "Energy and Work",
+            "content": "Energy is the capacity to do work. Work is done when a force causes displacement.\n\nWork = Force × Distance × cos(θ)\n\nTypes of energy:\n• Kinetic Energy (KE) = ½mv² – energy of motion\n• Potential Energy (PE) = mgh – stored energy due to position\n• Thermal Energy – heat from molecular motion\n\nConservation of Energy: Energy cannot be created or destroyed, only transformed from one form to another.\n\nPower = Work / Time (measured in Watts)",
+            "quiz_subject": "energy work kinetic potential conservation power"
+          },
+          {
+            "title": "Momentum and Collisions",
+            "content": "Momentum is the product of an object's mass and velocity: p = mv\n\nConservation of Momentum: In an isolated system, total momentum before a collision equals total momentum after.\n\nTypes of collisions:\n• Elastic – both momentum and kinetic energy are conserved (e.g., billiard balls)\n• Inelastic – momentum is conserved but kinetic energy is not (e.g., car crashes)\n• Perfectly Inelastic – objects stick together after collision\n\nImpulse = Force × Time = Change in Momentum (Δp)",
+            "quiz_subject": "momentum collisions elastic inelastic impulse conservation"
+          }
+        ]
+      }
+    ]
+  },
+  "Chemistry (Organic)": {
+    "courses": [
+      {
+        "title": "Organic Chemistry Fundamentals",
+        "topics": [
+          {
+            "title": "Carbon and Bonding",
+            "content": "Organic chemistry is the study of carbon-containing compounds. Carbon is unique because it can form four covalent bonds, creating an enormous variety of molecules.\n\nTypes of bonds:\n• Single bond (σ) – sharing of 1 pair of electrons\n• Double bond (1σ + 1π) – sharing of 2 pairs\n• Triple bond (1σ + 2π) – sharing of 3 pairs\n\nHybridization:\n• sp3 – tetrahedral geometry (109.5°)\n• sp2 – trigonal planar (120°)\n• sp – linear (180°)\n\nCarbon's versatility is why life on Earth is carbon-based.",
+            "quiz_subject": "organic chemistry carbon bonding hybridization sp3 sp2"
+          },
+          {
+            "title": "Functional Groups",
+            "content": "Functional groups are specific groupings of atoms within molecules that determine the chemical properties.\n\nKey functional groups:\n• Hydroxyl (-OH) – Alcohols\n• Carbonyl (C=O) – Aldehydes and Ketones\n• Carboxyl (-COOH) – Carboxylic Acids\n• Amino (-NH2) – Amines\n• Phosphate (-PO4) – important in DNA/ATP\n• Sulfhydryl (-SH) – Thiols\n\nRecognizing functional groups helps predict how a molecule will react and what properties it will have.",
+            "quiz_subject": "functional groups hydroxyl carbonyl carboxyl amino organic"
+          }
+        ]
+      }
+    ]
+  },
+  "Microbiology": {
+    "courses": [
+      {
+        "title": "Introduction to Microbiology",
+        "topics": [
+          {
+            "title": "The Microbial World",
+            "content": "Microbiology is the study of organisms too small to see with the naked eye: bacteria, viruses, fungi, and protists.\n\nKey domains:\n• Bacteria – prokaryotic, unicellular, diverse metabolisms\n• Archaea – prokaryotic but genetically distinct from bacteria\n• Eukarya – includes fungi, protists, and some algae\n\nViruses are acellular but studied in microbiology. They require a host cell to replicate.\n\nMicrobes are essential for nutrient cycling, food production, medicine, and biotechnology.",
+            "quiz_subject": "microbiology bacteria viruses fungi prokaryotic eukaryotic"
+          },
+          {
+            "title": "Bacterial Structure and Growth",
+            "content": "Bacteria are single-celled prokaryotes with unique structures.\n\nKey structures:\n• Cell wall – provides shape and protection\n• Plasma membrane – controls what enters/exits\n• Ribosomes – protein synthesis\n• Flagella – movement\n• Pili – attachment and DNA transfer\n• Capsule – protection from immune system\n\nBacterial growth phases:\n1. Lag Phase – adaptation\n2. Log Phase – exponential growth\n3. Stationary Phase – growth = death\n4. Death Phase – decline\n\nGeneration time can be as short as 20 minutes.",
+            "quiz_subject": "bacterial structure cell wall flagella growth phases lag log"
+          }
+        ]
+      }
+    ]
+  }
+}

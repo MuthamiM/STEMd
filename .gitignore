@@ -1,0 +1,58 @@
+[init]
+	defaultBranch = main
+# Source Control ignore patterns for STEMd Polyglot project
+# .NET / C#
+bin/
+obj/
+*.user
+*.userprep
+*.sln.docstates
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+env/
+venv/
+.env
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# C++ / MSVC
+ipch/
+*.aps
+*.bak
+*.cache
+*.dg
+*.ilk
+*.lib
+*.ncb
+*.obj
+*.opt
+*.pdb
+*.res
+*.sbr
+*.scc
+*.suo
+*.tlb
+*.tlh
+*.tli
+*.user
+*.vcproj
+*.visualelements
+_ChmProject/
+Debug/
+Release/
+x64/
+x86/
+
+# Generic
+.DS_Store
+Thumbs.db
+*.log
+build_output.txt
+build_output_final.txt

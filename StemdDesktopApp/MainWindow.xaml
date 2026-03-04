@@ -1,0 +1,578 @@
+﻿<Window x:Class="StemdDesktopApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MyStudy - Course Dashboard" Height="768" Width="1200"
+        Background="#FFF4F5F7" Foreground="#333" FontFamily="Segoe UI"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <!-- Theme Colors -->
+        <Color x:Key="BrandColor">#FF5B58EC</Color>
+        <SolidColorBrush x:Key="BrandBrush" Color="{StaticResource BrandColor}"/>
+        <Color x:Key="CardBackground">#FFFFFFFF</Color>
+        <Color x:Key="AppBackground">#FFF4F5F7</Color>
+        
+        <!-- Sidebar Button Style -->
+        <Style x:Key="SidebarButtonStyle" TargetType="RadioButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FFAEB1F4"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="15,12"/>
+            <Setter Property="Margin" Value="15,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#1AFFFFFF"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#33FFFFFF"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="PrimaryButton">
+            <Setter Property="Background" Value="{StaticResource BrandBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style TargetType="Border" x:Key="CardStyle">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Opacity="0.03" BlurRadius="10" ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- REGISTRATION / LOGIN VIEW -->
+        <Grid x:Name="ViewLogin" Visibility="Visible" Panel.ZIndex="100">
+            <!-- Deep Blue Background and Abstract Shapes -->
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#1E50B5" Offset="0.0"/>
+                        <GradientStop Color="#0D3580" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Path Fill="#2266CC" Data="M 100,50 C 200,-50 300,150 400,50 L 400,0 L 100,0 Z" Opacity="0.6"/>
+                <Ellipse Fill="#1555B0" Width="300" Height="300" Margin="-100,-100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.5"/>
+                <Ellipse Fill="#0B2B6E" Width="500" Height="500" Margin="0,0,-200,-200" HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.5"/>
+                <Path Fill="#1A4A99" Data="M 0,600 Q 150,400 300,600 T 600,600 L 600,800 L 0,800 Z" Opacity="0.7"/>
+            </Grid>
+            
+            <Border Width="450" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                    Background="#22FFFFFF" BorderBrush="#44FFFFFF" BorderThickness="1" CornerRadius="20" Padding="40"
+                    Margin="0,0,0,0">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="30" ShadowDepth="10" Opacity="0.4"/>
+                </Border.Effect>
+
+                <StackPanel>
+                    <TextBlock Text="STEMd" HorizontalAlignment="Center" Foreground="White" FontSize="22" FontWeight="Bold" Margin="0,0,0,25" FontStyle="Italic"/>
+                    <TextBlock Text="Login" Foreground="White" FontSize="26" FontWeight="Bold" Margin="0,0,0,20"/>
+                    
+                    <TextBlock Text="Email (Student Alias)" Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,5"/>
+                    <TextBox x:Name="RegUsername" Padding="12" Height="40" Margin="0,0,0,15" Text="Student_01" Background="White" BorderThickness="0"/>
+                    
+                    <TextBlock Text="Select Your Major" Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="RegMajor" Padding="12" Height="40" Margin="0,0,0,25" SelectedIndex="0" Background="White" BorderThickness="0">
+                        <!-- Items populated dynamically from courses.json -->
+                    </ComboBox>
+                    
+                    <Button Content="Sign in" Background="#0C2556" Foreground="White" FontWeight="Bold" 
+                            Height="45" Click="Login_Click" BorderThickness="0" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- MAIN APP LAYOUT (Hidden until Login) -->
+        <Grid x:Name="MainAppLayout" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/> <!-- Purple Sidebar -->
+                <ColumnDefinition Width="*"/>   <!-- Main Content Center -->
+                <ColumnDefinition Width="Auto"/> <!-- Right Sidebar -->
+            </Grid.ColumnDefinitions>
+
+            <!-- 1. Left Sidebar (Solid Purple) -->
+            <Border Background="{StaticResource BrandBrush}">
+                <StackPanel Margin="0,30,0,0">
+                    <TextBlock Text="MyStudy" FontSize="26" FontWeight="Bold" Margin="25,0,0,40" Foreground="White" FontStyle="Italic"/>
+                    <RadioButton Content="⬜ Dashboard" Style="{DynamicResource SidebarButtonStyle}" IsChecked="True" Checked="Menu_Dashboard_Checked"/>
+                    <RadioButton Content="📚 Classes" Style="{DynamicResource SidebarButtonStyle}" Checked="Menu_Course_Checked" x:Name="CourseMenuBtn"/>
+                    <RadioButton Content="🔗 Resources" Style="{DynamicResource SidebarButtonStyle}" Checked="Menu_Resources_Checked"/>
+                    <RadioButton Content="📅 Learning plan" Style="{DynamicResource SidebarButtonStyle}" Checked="Menu_LearningPlan_Checked"/>
+                    <RadioButton Content="💬 Chat" Style="{DynamicResource SidebarButtonStyle}" Checked="Menu_Chat_Checked"/>
+                    <RadioButton Content="🎓 Analytics" Style="{DynamicResource SidebarButtonStyle}" Checked="Menu_Analytics_Checked"/>
+                    <RadioButton Content="⚙️ Settings" Style="{DynamicResource SidebarButtonStyle}" Checked="Menu_Settings_Checked" Margin="15,40,15,5"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 2. Main Content Center -->
+            <Grid Grid.Column="1" Margin="30">
+                <!-- VIEW: Dashboard Focus -->
+                <Grid x:Name="ViewDashboard" Visibility="Visible">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Search Bar -->
+                    <Grid Margin="0,0,0,30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="{StaticResource BrandBrush}" Width="40" Height="40" CornerRadius="8,0,0,8">
+                            <TextBlock Text="🔍" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Column="1" Background="White" BorderThickness="0" CornerRadius="0,8,8,0">
+                            <TextBlock Text="Search courses, documents, activities..." Foreground="#AAA" VerticalAlignment="Center" Margin="15,0,0,0"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- Greeting -->
+                    <StackPanel Grid.Row="1" Margin="0,0,0,30">
+                        <TextBlock Text="Good Morning" FontSize="14" Foreground="#888" Margin="0,0,0,5"/>
+                        <TextBlock x:Name="DashUsername" Text="Welcome, James!" FontSize="26" FontWeight="Bold"/>
+                    </StackPanel>
+
+                    <!-- Last Opened Courses -->
+                    <StackPanel Grid.Row="2" Margin="0,0,0,30">
+                        <Grid Margin="0,0,0,15">
+                            <TextBlock Text="Last Opened Courses" FontSize="16" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock Text="&lt;" Foreground="#AAA" FontWeight="Bold" Margin="0,0,10,0" Cursor="Hand"/>
+                                <TextBlock Text="&gt;" Foreground="#333" FontWeight="Bold" Cursor="Hand"/>
+                            </StackPanel>
+                        </Grid>
+                        
+                        <ItemsControl x:Name="DashCourseCards">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <!-- Your Courses List -->
+                    <StackPanel Grid.Row="3">
+                        <Grid Margin="0,0,0,15">
+                            <TextBlock Text="Your courses" FontSize="16" FontWeight="Bold"/>
+                            <TextBlock Text="See All" Foreground="{StaticResource BrandBrush}" FontWeight="SemiBold" HorizontalAlignment="Right" Cursor="Hand"/>
+                        </Grid>
+                        <ItemsControl x:Name="DashCourseRows"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- VIEW: Course Outline & Embedded AI -->
+                <Grid x:Name="ViewCourse" Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- LEFT: Topic List + AI Chatbot -->
+                    <Grid Grid.Column="0" Margin="0,0,20,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock x:Name="CourseOutlineTitle" Text="Course Outline" FontSize="18" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <TextBlock x:Name="CourseOutlineSubtitle" Grid.Row="1" Text="" FontSize="12" Foreground="#888" Margin="0,0,0,10"/>
+                        
+                        <!-- Dynamic Topic List (populated from CourseEngine) -->
+                        <ListBox x:Name="TopicListBox" Grid.Row="2" Background="Transparent" BorderThickness="0" Margin="0,0,0,15" SelectionChanged="TopicListBox_SelectionChanged"/>
+
+                        <!-- Embedded AI Chatbot -->
+                        <Border Grid.Row="3" Style="{StaticResource CardStyle}" Padding="15" Background="White" BorderBrush="#E2E8F0" BorderThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="🤖 AI Tutor Chat" FontWeight="Bold" Margin="0,0,0,10" Foreground="{StaticResource BrandBrush}"/>
+                                <ScrollViewer x:Name="ChatScroller" Grid.Row="1" Margin="0,0,0,10" VerticalScrollBarVisibility="Auto">
+                                    <TextBlock x:Name="CourseChatHistory" TextWrapping="Wrap" Foreground="#555" FontSize="13" Text="AI: Hello! Ask me about this topic."/>
+                                </ScrollViewer>
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="CourseChatInput" Padding="5" BorderBrush="#CBD5E1" BorderThickness="1"/>
+                                    <Button Grid.Column="1" Content="Send" Style="{StaticResource PrimaryButton}" Padding="10,5" Margin="5,0,0,0" Click="CourseChatSend_Click"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <!-- RIGHT: Lesson Content OR Quiz (toggled dynamically) -->
+                    <Grid Grid.Column="1">
+                        <!-- LESSON READING PANEL -->
+                        <Border x:Name="LessonPanel" Style="{StaticResource CardStyle}" Padding="40" Visibility="Visible">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="LessonTitle" Text="Select a topic" FontSize="26" FontWeight="Bold" Margin="0,0,0,15"/>
+                                <ScrollViewer Grid.Row="1" Margin="0,0,0,20" VerticalScrollBarVisibility="Auto">
+                                    <TextBlock x:Name="LessonContent" Text="Choose a topic from the outline to begin reading." FontSize="15" TextWrapping="Wrap" LineHeight="26" Foreground="#444"/>
+                                </ScrollViewer>
+                                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                    <Button x:Name="TakeQuizBtn" Content="📝 Take Quiz on This Topic" Style="{StaticResource PrimaryButton}" Click="TakeQuiz_Click"/>
+                                    <TextBlock x:Name="TopicStatusText" VerticalAlignment="Center" Margin="15,0,0,0" FontWeight="Bold" Foreground="#20C997"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- QUIZ PANEL (hidden until Take Quiz clicked) -->
+                        <Border x:Name="QuizPanel" Style="{StaticResource CardStyle}" Padding="40" Visibility="Collapsed">
+                            <StackPanel>
+                                <TextBlock x:Name="ActiveLessonTitle" Text="Quiz" FontSize="26" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <TextBlock Text="Questions are AI-generated and randomized on every visit to prevent cheating." Foreground="#666" Margin="0,0,0,25"/>
+                                <Border Background="#F4F5F7" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="10" Padding="25" Margin="0,0,0,25">
+                                    <TextBlock x:Name="QuizQuestionText" Text="Loading..." FontSize="16" TextWrapping="Wrap"/>
+                                </Border>
+                                <TextBlock Text="Your Answer:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                <TextBox x:Name="QuizAnswerInput" MinHeight="100" Padding="10" Margin="0,0,0,20" BorderBrush="#CBD5E1" BorderThickness="1" AcceptsReturn="True" TextWrapping="Wrap"/>
+                                
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Submit Answer" Style="{StaticResource PrimaryButton}" Click="SubmitQuiz_Click"/>
+                                    <Button x:Name="NextTopicBtn" Content="➡ Next Topic" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0" Click="NextTopic_Click" Visibility="Collapsed"/>
+                                    <Button Content="⬅ Back to Lesson" Margin="10,0,0,0" Click="BackToLesson_Click" Background="Transparent" Foreground="{StaticResource BrandBrush}" BorderThickness="0" Cursor="Hand"/>
+                                    <TextBlock x:Name="QuizFeedback" VerticalAlignment="Center" Margin="15,0,0,0" FontWeight="Bold" FontSize="16"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
+                
+                <!-- VIEW Analytics / Certificate Dropin -->
+                <Grid x:Name="ViewAnalytics" Visibility="Collapsed">
+                     <Border Style="{StaticResource CardStyle}" Padding="40" VerticalAlignment="Top">
+                        <StackPanel>
+                            <TextBlock Text="🎓 Analytics &amp; Certificates" FontSize="26" FontWeight="Bold" Margin="0,0,0,20"/>
+                            <TextBlock Text="Hook into the C# SQLite DB to pull score, then pipe to Java Generator." Foreground="#666" Margin="0,0,0,20"/>
+                            <Button Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Content="Generate Certificate" Click="GenerateCert_Click"/>
+                            <TextBlock x:Name="CertStatusText" Margin="0,20,0,0" Foreground="Green" FontWeight="Bold" FontSize="14"/>
+                        </StackPanel>
+                     </Border>
+                </Grid>
+
+                <!-- VIEW Settings -->
+                <Grid x:Name="ViewSettings" Visibility="Collapsed">
+                     <Border Style="{StaticResource CardStyle}" Padding="40" VerticalAlignment="Top">
+                        <StackPanel>
+                            <TextBlock Text="⚙️ App Settings" FontSize="26" FontWeight="Bold" Margin="0,0,0,20"/>
+                            
+                            <TextBlock Text="User Profile" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                                <Border Width="60" Height="60" CornerRadius="30" Background="#E0E0E0" Margin="0,0,15,0">
+                                    <TextBlock Text="👤" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+                                </Border>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock x:Name="SettingsUserDisplay" Text="User Name" FontWeight="Bold" FontSize="16"/>
+                                    <TextBlock x:Name="SettingsMajorDisplay" Text="Selected Major" Foreground="#888"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <Separator Margin="0,0,0,20"/>
+
+                            <TextBlock Text="App Preferences" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                            <CheckBox Content="Enable AI Auto-suggestions" IsChecked="True" Margin="0,0,0,10"/>
+                            <CheckBox Content="Dark Mode (Beta)" Margin="0,0,0,10"/>
+                            <CheckBox Content="Desktop Notifications" IsChecked="True" Margin="0,0,0,25"/>
+
+                            <TextBlock Text="System Info" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                            <TextBlock x:Name="AppVersionText" Text="Version 1.0.0" Foreground="#888" Margin="0,0,0,20"/>
+                            
+                            <Button Content="Save &amp; Back to Dashboard" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Click="Menu_Dashboard_Checked"/>
+                        </StackPanel>
+                     </Border>
+                </Grid>
+
+                <!-- VIEW Resources -->
+                <Grid x:Name="ViewResources" Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock Text="🔗 Learning Resources" FontSize="26" FontWeight="Bold" Margin="0,0,0,20"/>
+                        <ItemsControl x:Name="ResourcesPanel">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </Grid>
+
+                <!-- VIEW Learning Plan -->
+                <Grid x:Name="ViewLearningPlan" Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock Text="📅 Your Learning Plan" FontSize="26" FontWeight="Bold" Margin="0,0,0,20"/>
+                        <Border Style="{StaticResource CardStyle}" Padding="20">
+                            <StackPanel>
+                                <TextBlock Text="Upcoming Milestones" FontWeight="Bold" Margin="0,0,0,15"/>
+                                <ItemsControl x:Name="LearningMilestones"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+                <!-- VIEW Chat -->
+                <Grid x:Name="ViewChat" Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Chat Contact List -->
+                    <Border Grid.Column="0" Background="White" CornerRadius="15,0,0,15" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="Chats" FontWeight="Bold" FontSize="18" Margin="0,0,0,15"/>
+                            <Border Background="#F4F5F7" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+                                <TextBlock Text="🤖 AI Tutor (Online)"/>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Main Chat Interface -->
+                    <Border Grid.Column="1" Background="White" CornerRadius="0,15,15,0" Margin="1,0,0,0" Padding="20">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Text="🤖 Global AI Assistant" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <Separator Grid.Row="0" VerticalAlignment="Bottom"/>
+                            
+                            <ScrollViewer x:Name="GlobalChatScroller" Grid.Row="1" Margin="0,10">
+                                <TextBlock x:Name="GlobalChatHistory" TextWrapping="Wrap" FontSize="13" Text="AI: Welcome to the Global Lobby! How can I assist you with your current major today?"/>
+                            </ScrollViewer>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Padding="10" BorderBrush="#EEE" BorderThickness="1" x:Name="GlobalChatInput"/>
+                                <Button Grid.Column="1" Content="Send" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0" Click="GlobalChatSend_Click"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+            </Grid>
+
+            <!-- 3. Right Sidebar (White) -->
+            <Border x:Name="RightSidebarPanel" Grid.Column="2" Width="380" Background="White" Padding="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Top Ribbon: Date & User Icon -->
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock x:Name="SidebarDate" Text="" FontWeight="Bold" FontSize="16"/>
+                            <TextBlock x:Name="SidebarDay" Text="" Foreground="#888" FontSize="12"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="🔔" VerticalAlignment="Center" FontSize="16" Margin="0,0,15,0"/>
+                            <Border Width="40" Height="40" CornerRadius="20" Background="#E0E0E0">
+                                <TextBlock Text="👤" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Learning Progress & Course Time (Row 1) -->
+                    <Grid Grid.Row="1" Margin="0,30,0,30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Learning Progress -->
+                        <Border Style="{StaticResource CardStyle}" Background="#F4F5F7" Margin="0,0,10,0" Padding="15">
+                            <StackPanel>
+                                <Grid>
+                                    <TextBlock Text="Learning Progress" FontWeight="Bold" FontSize="12"/>
+                                    <Border Background="{StaticResource BrandBrush}" CornerRadius="8" HorizontalAlignment="Right" Padding="8,2">
+                                        <TextBlock Text="Task ▼" Foreground="White" FontSize="10"/>
+                                    </Border>
+                                </Grid>
+                                <!-- Stats -->
+                                <StackPanel Orientation="Horizontal" Margin="0,15,0,15" HorizontalAlignment="Center">
+                                    <StackPanel Margin="0,0,15,0">
+                                        <TextBlock x:Name="DashPercentCompleted" Text="0%" FontWeight="Bold" FontSize="14"/>
+                                        <TextBlock Text="Completed" Foreground="#888" FontSize="10"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,15,0">
+                                        <TextBlock x:Name="DashPercentInProgress" Text="0%" FontWeight="Bold" FontSize="14"/>
+                                        <TextBlock Text="In progress" Foreground="#888" FontSize="10"/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock x:Name="DashPercentLocked" Text="0%" FontWeight="Bold" FontSize="14"/>
+                                        <TextBlock Text="Locked" Foreground="#888" FontSize="10"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <!-- Circular Donut Diagram mock -->
+                                <Border Width="100" Height="100" CornerRadius="50" BorderBrush="{StaticResource BrandBrush}" BorderThickness="8" HorizontalAlignment="Center" Margin="0,0,0,10">
+                                    <Border Width="70" Height="70" CornerRadius="35" BorderBrush="#5BC0DE" BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Border Width="40" Height="40" CornerRadius="20" BorderBrush="#F0AD4E" BorderThickness="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Course Time -->
+                        <Border Grid.Column="1" Margin="10,0,0,0">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,15">
+                                    <TextBlock Text="Course Time" FontWeight="Bold" FontSize="12"/>
+                                    <TextBlock x:Name="DashScore" Text="Score: 0" Foreground="#888" FontSize="11" HorizontalAlignment="Right" FontWeight="SemiBold"/>
+                                </Grid>
+                                
+                                <Border Background="#EEF2FF" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Background="{StaticResource BrandBrush}" CornerRadius="5" Width="30" Height="30" Margin="0,0,10,0">
+                                            <TextBlock Text="📚" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock x:Name="SideTask1Title" Text="Topic 1" FontWeight="Bold" FontSize="12"/>
+                                            <TextBlock x:Name="SideTask1Sub" Text="Pending" Foreground="#888" FontSize="10"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <Border Background="#F8F9FA" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Background="#6C757D" CornerRadius="5" Width="30" Height="30" Margin="0,0,10,0">
+                                            <TextBlock Text="⚙️" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock x:Name="SideTask2Title" Text="Topic 2" FontWeight="Bold" FontSize="12"/>
+                                            <TextBlock x:Name="SideTask2Sub" Text="Locked" Foreground="#888" FontSize="10"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                                
+                                <Border Background="#E6F2FF" CornerRadius="8" Padding="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Background="#17A2B8" CornerRadius="5" Width="30" Height="30" Margin="0,0,10,0">
+                                            <TextBlock Text="💻" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock x:Name="SideTask3Title" Text="Topic 3" FontWeight="Bold" FontSize="12"/>
+                                            <TextBlock x:Name="SideTask3Sub" Text="Locked" Foreground="#888" FontSize="10"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    
+                    <!-- Learning Statistic (Row 2) -->
+                    <Border Grid.Row="2" Style="{StaticResource CardStyle}" Background="#F4F5F7" Padding="20">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,20">
+                                <TextBlock Text="Learning Statistic" FontWeight="Bold" FontSize="14"/>
+                                <Border Background="{StaticResource BrandBrush}" CornerRadius="8" HorizontalAlignment="Right" Padding="10,4">
+                                    <TextBlock Text="Weekly ▼" Foreground="White" FontSize="10"/>
+                                </Border>
+                            </Grid>
+                            
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                                <TextBlock Text="● Target Time" Foreground="{StaticResource BrandBrush}" FontSize="11" Margin="0,0,15,0"/>
+                                <TextBlock Text="● Target View" Foreground="#5BC0DE" FontSize="11" Margin="0,0,15,0"/>
+                                <TextBlock Text="● Target Score" Foreground="#1E50B5" FontSize="11"/>
+                            </StackPanel>
+
+                            <!-- Vertical Bar Chart Dynamic ItemsControl -->
+                            <Grid Height="120">
+                                <!-- Horizontal Background Lines -->
+                                <UniformGrid Rows="4">
+                                    <Border BorderBrush="#E0E0E0" BorderThickness="0,1,0,0"/>
+                                    <Border BorderBrush="#E0E0E0" BorderThickness="0,1,0,0"/>
+                                    <Border BorderBrush="#E0E0E0" BorderThickness="0,1,0,0"/>
+                                    <Border BorderBrush="#E0E0E0" BorderThickness="0,1,0,0"/>
+                                </UniformGrid>
+                                <!-- Overlay the bars dynamically -->
+                                <ItemsControl x:Name="DashActivityChart" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
