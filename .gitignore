@@ -54,5 +54,6 @@ x86/
 .DS_Store
 Thumbs.db
 *.log
+*.db
 build_output.txt
 build_output_final.txt
